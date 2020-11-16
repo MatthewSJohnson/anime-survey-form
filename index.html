@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+
+<!--Survey Form Project
+    Create by Matthew S Johnson-->
+
+<html>
+    <head>
+        <link href='https://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Anime Survey</title>
+        <style>
+            #main{
+                position: relative;
+                margin: 0;
+            }
+            
+            #background-img{
+                position: fixed;
+                width: 100vw;
+                height: 100vh;
+                margin: 0;
+                top: 0;
+                left: 0;
+                filter: grayscale(100%) blur(2.5px);
+                z-index: -1;
+                
+            }
+            
+            #screen{
+                background-color: rgba(255,172,17,0.45);
+                width: 100vw;
+                height: 100vh;
+                position: fixed;
+                z-index: 1;
+                margin: 0;
+                
+                
+                
+            }
+
+            #content{
+                position: relative;
+                width: 55vw;
+                margin-bottom: 10px;
+                margin-left: auto;
+                margin-right: auto;
+                z-index: 2;
+                display: grid;
+                grid-template-columns: auto;
+                grid-template-rows: auto auto;
+                grid-gap: 10px;
+                
+                grid-template-areas:
+                "title-cell"
+                "form-cell";
+                
+                
+                
+            }
+
+            #title-wrapper{
+                grid-area: title-cell;
+                background-color: rgba(255,172,17,0.9);
+                margin-top: 20px;
+                border-radius: 10px;
+
+                width: 75%;
+                position: relative;
+                
+                padding: 5px 2em;
+                margin: 2em auto 5px;
+                z-index: 10;
+                
+                
+                
+            }
+
+            #title-wrapper:after, #title-wrapper:before {
+                content: "";
+                position: absolute;
+                display: block;
+                bottom: 1em;
+                border: 2em solid rgba(255,172,17,0.9);
+                z-index: 10;
+            }
+
+            #title-wrapper:before{
+                left: -2.5em;
+                border-right-width: 1.5em;
+                border-left-color: transparent;
+            }
+
+            #title-wrapper:after{
+                right: -2.5em;
+                border-left-width: 1.5em;
+                border-right-color: transparent;
+                
+            }
+
+
+            #title{
+                margin-top: 0px;
+                padding-top: 10px;
+                margin-bottom: 0px;
+                text-align: center;
+                color: rgb(255, 247, 247);
+                font-family: 'Bree Serif', Serif;
+                font-weight: bold;
+                text-transform: uppercase;
+                font-size: 30px;
+                text-shadow: 0px 0px 8px 0px rgba(0,0,0,0.4);
+            }
+
+            #description{
+                margin-top: 0px;
+                font-family: 'Bree Serif', Serif;
+                font-style: italic;
+                text-align: center;
+                color: #260377;
+                color: rgb(255, 247, 247);
+                font-size: 18px;
+            }
+
+            #survey-form{
+                grid-area: form-cell;
+                background-color: rgba(255,172,17,0.9);
+                border-radius: 20px;
+                padding: 30px;
+                color: rgb(255, 247, 247);
+                font-family: 'Bree Serif', serif;
+                
+                
+            }
+
+            input[type=text]{
+                width: 100%;
+                padding: 12px 15px;
+                margin: 8px 0;
+                box-sizing: border-box;
+                font-family: 'Bree Serif', serif;
+                font-size: 16px;
+                border-radius: 5px;
+                border: none;
+                -webkit-transition: 0.5s;
+                transition: 0.5s;
+                outline: none;
+            }
+
+            input[type=text]:focus {
+                border: 3px solid orange;
+                box-shadow: 0px 5px 5px 5px rgba(0,0,0,0.4);
+            }
+
+            input[type=email]{
+                width: 100%;
+                padding: 12px 15px;
+                margin: 8px 0;
+                box-sizing: border-box;
+                font-family: 'Bree Serif', serif;
+                font-size: 16px;
+                border-radius: 5px;
+                border: none;
+                -webkit-transition: 0.5s;
+                transition: 0.5s;
+                outline: none;
+            }
+
+            input[type=email]:focus{
+                border: 3px solid orange;
+                box-shadow: 0px 5px 5px 5px rgba(0,0,0,0.4);
+            }
+
+            input[type=number] {
+                width: 50%;
+                padding: 12px 15px;
+                margin: 8px 0;
+                box-sizing: border-box;
+                font-family: 'Bree Serif', serif;
+                font-size: 16px;
+                border-radius: 5px;
+                border: none;
+                -webkit-transition: 0.5s;
+                transition: 0.5s;
+                outline: none;
+            }
+
+            input[type=number]:focus{
+                border: 3px solid orange;
+                box-shadow: 0px 5px 5px 5px rgba(0,0,0,0.4);
+            }
+
+            select {
+                padding: 12px 15px;
+                margin: 8px 0;
+                box-sizing: border-box;
+                font-family: 'Bree Serif', serif;
+                font-size: 16px;
+                border-radius: 5px;
+                border: none;
+                color: rgb(109, 108, 108);
+                -webkit-transition: 0.5s;
+                transition: 0.5s;
+                outline: none;
+            }
+
+            select:focus{
+                border: 3px solid orange;
+                box-shadow: 0px 5px 5px 5px rgba(0,0,0,0.4);
+            }
+
+            button{
+                width: 100%;
+                font-family: 'Bree Serif', serif;
+                margin-top: 5px;
+                padding-top: 5px;
+                padding-bottom: 5px;
+                font-size: 20px;
+                border-radius: 5px;
+                border: none;
+                outline: none;
+                -webkit-transition: 0.5s;
+                transition: 0.5s;
+                text-transform: uppercase;
+                background-color:rgb(54, 54, 54);
+                color: rgb(255, 247, 247);
+            }
+
+            button:hover{
+                box-shadow: 0px 5px 5px 5px rgba(0,0,0,0.4);
+                
+            }
+
+
+
+            #comment{
+                width: 100%;
+                height: 100px;
+                padding: 12px 15px;
+                margin: 0px 0px 8px 0px;
+                box-sizing: border-box;
+                font-family: 'Bree Serif', serif;
+                font-size: 16px;
+                border-radius: 5px;
+                border: none;
+                -webkit-transition: 0.5s;
+                transition: 0.5s;
+                outline: none;
+                resize: vertical;
+            }
+
+            #comment:focus {
+                border: 3px solid orange;
+                box-shadow: 0px 5px 5px 5px rgba(0,0,0,0.4);
+            }
+
+            .radio-label{
+                
+                font-size: 16px;
+            }
+
+            .question-label{
+                
+                font-size: 20px;
+            }
+            
+
+        </style>
+    </head>
+
+
+    <body id="main">
+        <img id="background-img" src="https://github.com/MatthewSJohnson/RockLeeTributePage/blob/main/images/wallpaperflare.com_wallpaper%20(11).jpg?raw=true">
+        <div id="screen"></div>
+        <div id="content">
+            <div id="title-wrapper">
+                <h1 id="title">Anime Survey Form</h1>
+                <p id="description">survey on anime devotion</p>
+            </div>
+            <form id="survey-form" action="#">
+                <label id="name-label" class="question-label" for="name">Name</label>
+                <input id="name" name="name" type="text" placeholder="Enter your name" required>
+                <label id="email-label" class="question-label" for="email">Email</label>
+                <input id="email" name="email" type="email" placeholder="Enter your email" required>
+                <label id="number-label" class="question-label" for="number">Age</label><br>
+                <input id="number" name="number" type="number" min="1" max="150" step="1" placeholder="Enter age"><br>
+                <label for="frequency" class="question-label">How often do you watch anime?</label>
+                <select id="dropdown" name="frequency" placeholder="Select an option">
+                    <option value="never">Never</option>
+                    <option value="occasionaly">Occasionaly (less than 1 hr a week)</option>
+                    <option value="casual">Casually (1-8hrs a week)</option>
+                    <option value="fan">Fan (8-16hrs a week)</option>
+                    <option value="addicted">Can't get enough (16-32hrs a week)</option>
+                    <option value="beyond-addicted">Eat, sleep, anime, repeat (more than 32hrs a week)</option>
+                </select>
+                <p class="question-label">What is your main source for anime?</p>
+                <input type="radio" id="crunchyroll" name="stream-source" value="crunchyroll" checked="checked">
+                <label for="crunchyroll" class="radio-label">Crunchyroll</label><br>
+                <input type="radio" id="funimation" name="stream-source" value="funimation">
+                <label for="funimation" class="radio-label">Funimation</label><br>
+                <input type="radio" id="netflix" name="stream-source" value="netflix">
+                <label for="netflix" class="radio-label">Netflix</label><br>
+                <input type="radio" id="hulu" name="stream-source" value="hulu">
+                <label for="hulu" class="radio-label">Hulu</label><br>
+                <input type="radio" id="other-radio" name="stream-source" value="other-radio">
+                <label for="other-radio" class="radio-label">Other</label><br>
+                <p class="question-label">What shows do you watch? (Check all that apply)</p>
+                <input type="checkbox" id="onepiece" name="show" value="onepiece">
+                <label for="onepiece" class="radio-label">One Piece</label><br>
+                <input type="checkbox" id="onepunch" name="show" value="onepunch">
+                <label for="onepunch" class="radio-label">One Punch Man</label><br>
+                <input type="checkbox" id="naruto" name="show" value="naruto">
+                <label for="naruto" class="radio-label">Naruto</label><br>
+                <input type="checkbox" id="sao" name="show" value="sao">
+                <label for="sao" class="radio-label">Sword Art Online</label><br>
+                <input type="checkbox" id="fairytail" name="show" value="fairytail">
+                <label for="fairytail" class="radio-label">Fairy Tail</label><br>
+                <input type="checkbox" id="myhero" name="show" value="myhero">
+                <label for="myhero" class="radio-label">My Hero Academia</label><br>
+                <input type="checkbox" id="blackclover" name="show" value="blackclover">
+                <label for="blackclover" class="radio-label">Black Clover</label><br>
+                <input type="checkbox" id="toradora" name="show" value="toradora">
+                <label for="toradora" class="radio-label">Toradora!</label><br>
+                <input type="checkbox" id="other-show" name="show" value="other-show">
+                <label for="other-show" class="radio-label">Other</label><br>
+                <p class="question-label">What is your favorite show?</p>
+                <input id="favorite-show" type="text" placeholder="Enter show">
+                <p class="question-label">Do you read manga?</p>
+                <input type="radio" id="manga-yes" name="manga" value="manga-yes">
+                <label for="manga-yes" class="radio-label">Of course!</label><br>
+                <input type="radio" id="manga-no" name="manga" value="manga-no">
+                <label for="manga-no" class="radio-label">Not for me</label><br>
+                <p class="question-label">What genres do you watch? (Check all that apply)</p>
+                <input type="checkbox" id="shounen" name="genre" value="shounen">
+                <label for="shounen" class="radio-label">Shounen</label><br>
+                <input type="checkbox" id="shoujo" name="genre" value="shoujo">
+                <label for="shoujo" class="radio-label">Shoujo</label><br>
+                <input type="checkbox" id="fantasy" name="genre" value="fantasy">
+                <label for="fantasy" class="radio-label">Fantasy</label><br>
+                <input type="checkbox" id="drama" name="genre" value="drama">
+                <label for="drama" class="radio-label">Drama</label><br>
+                <input type="checkbox" id="horror" name="genre" value="horror">
+                <label for="horror" class="radio-label">Horror</label><br>
+                <input type="checkbox" id="comedy" name="genre" value="comedy">
+                <label for="comedy" class="radio-label">Comedy</label><br>
+                <input type="checkbox" id="other-genre" name="genre" value="other-genre">
+                <label for="other-genre" class="radio-label">Other</label><br>
+                <p class="question-label">Comments and suggestions</p>
+                <textarea id="comment" placeholder="Enter a comment..."></textarea><br>
+                <button id="submit" type="submit">Submit</button>
+            </form>
+        </div>
+    </body>
+</html>
